@@ -25,14 +25,13 @@ jobs:
 
     - name: Install Python Dependencies
       run: |
-        python -m venv venv
-        venv\Scripts\activate.bat
-        pip install -r backend\requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
         pip install pyinstaller
 
     - name: Compile Backend (PyInstaller)
+      shell: pwsh
       run: |
-        venv\Scripts\activate.bat
         cd backend
         pyinstaller --onefile --name nexus-backend --collect-all scapy --collect-all uvicorn --collect-all fastapi run.py
 
