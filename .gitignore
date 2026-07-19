@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+backend/dist/
+backend/build/
+backend/*.spec
+
+# Node
+node_modules/
+frontend/dist/
+frontend/release/
+
+# System files
+.DS_Store
+*.db

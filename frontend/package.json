@@ -1,0 +1,90 @@
+{
+  "name": "nexus-sentinel",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "author": {
+    "name": "Ansh",
+    "email": "ansh@example.com"
+  },
+  "homepage": "https://github.com/ansh/nexus-sentinel",
+  "description": "AI-powered Network Monitoring and Cybersecurity Dashboard",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "electron:dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "dist": "vite build && electron-builder"
+  },
+    "build": {
+    "appId": "com.nexus.sentinel",
+    "productName": "Nexus Sentinel",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../backend/dist",
+        "to": "backend",
+        "filter": [
+          "nexus-backend",
+          "nexus-backend.exe"
+        ]
+      },
+      {
+        "from": "../backend/bin",
+        "to": "backend/bin",
+        "filter": [
+          "ollama",
+          "ollama.exe"
+        ]
+      }
+    ],
+    "linux": {
+      "target": ["deb"],
+      "category": "Network",
+      "maintainer": "Ansh <ansh@example.com>",
+      "icon": "build/icon.png"
+    },
+    "deb": {
+      "afterInstall": "./build/after-install.sh",
+      "depends": ["libcap2-bin"]
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "build/icon.png"
+    }
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.0.0",
+    "chart.js": "^4.4.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "tailwind-merge": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
+    "wait-on": "^7.2.0"
+  }
+}
