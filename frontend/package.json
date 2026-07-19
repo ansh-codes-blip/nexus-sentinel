@@ -8,8 +8,12 @@
     "name": "Ansh",
     "email": "ansh@example.com"
   },
-  "homepage": "https://github.com/ansh/nexus-sentinel",
+  "homepage": "https://github.com/ansh-codes-blip/nexus-sentinel",
   "description": "AI-powered Network Monitoring and Cybersecurity Dashboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ansh-codes-blip/nexus-sentinel.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -18,12 +22,13 @@
     "electron:dev": "concurrently -k \"vite\" \"wait-on tcp:5173 && electron .\"",
     "dist": "vite build && electron-builder"
   },
-    "build": {
+      "build": {
     "appId": "com.nexus.sentinel",
     "productName": "Nexus Sentinel",
     "directories": {
       "output": "release"
     },
+    "publish": null, 
     "files": [
       "dist/**/*",
       "electron/**/*"
@@ -56,8 +61,10 @@
       "afterInstall": "./build/after-install.sh",
       "depends": ["libcap2-bin"]
     },
-    "win": {
-      "target": ["nsis"],
+     "win": {
+      "target": [
+        "nsis"
+      ],
       "icon": "build/icon.png"
     }
   },
